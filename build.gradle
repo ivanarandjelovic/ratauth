@@ -13,6 +13,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: "io.ratpack.ratpack-java"
 apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: "jacoco"
 
 repositories {
   jcenter()
@@ -24,6 +25,14 @@ dependencies {
 }
 
 mainClassName = "org.aivan.ratauth.Main"
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "${buildDir}/jacocoHtml"
+    }
+}
 
 //eclipse {
 //    classpath {
