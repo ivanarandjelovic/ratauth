@@ -4,7 +4,9 @@ import org.aivan.ratauth.handlers.TestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ratpack.func.Action;
 import ratpack.server.RatpackServer;
+import ratpack.server.RatpackServerSpec;
 
 public class Main {
 
@@ -17,10 +19,15 @@ public class Main {
 		log.info("Ola from ratauth!");
 
 		RatpackServer
-				.start(serverSpec -> serverSpec
-						.handlers(chain -> chain.prefix("api/1", prefix -> prefix.get(testHandler))));
+				.start(setupServer());
 
 		log.info("Bye from ratauth!");
+	}
+
+	// function to setup Ratpack server
+	protected static Action<? super RatpackServerSpec> setupServer() {
+		return serverSpec -> serverSpec
+				.handlers(chain -> chain.prefix("api/1", prefix -> prefix.get(testHandler)));
 	}
 
 }

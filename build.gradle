@@ -22,6 +22,7 @@ repositories {
 dependencies {
     compile 'org.slf4j:slf4j-simple:+'
     testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:+'
 }
 
 mainClassName = "org.aivan.ratauth.Main"
