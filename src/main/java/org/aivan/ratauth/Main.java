@@ -1,5 +1,6 @@
 package org.aivan.ratauth;
 
+import org.aivan.ratauth.handlers.TestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,16 +10,15 @@ public class Main {
 
 	static Logger log = LoggerFactory.getLogger(Main.class);
 
+	static TestHandler testHandler = new TestHandler();
+	
 	public static void main(String[] args) throws Exception {
 
 		log.info("Ola from ratauth!");
 
 		RatpackServer
-				.start(serverSpec -> serverSpec.handlers(chain -> chain.prefix("api/1", prefix -> prefix.get(ctx -> {
-					log.debug("get 1 start");
-
-					ctx.render("test1");
-				}))));
+				.start(serverSpec -> serverSpec
+						.handlers(chain -> chain.prefix("api/1", prefix -> prefix.get(testHandler))));
 
 		log.info("Bye from ratauth!");
 	}
