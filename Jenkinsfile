@@ -17,7 +17,7 @@ pipeline {
 	
 		stage('Test') {
 			steps {
-				 sh './gradlew test --info'
+				 sh './gradlew cleanTest test --info'
 				 junit '**/test-results/test/*.xml'
 			}
 		}	
