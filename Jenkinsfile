@@ -19,6 +19,7 @@ pipeline {
 			steps {
 				 sh './gradlew cleanTest test --info'
 				 junit '**/test-results/test/*.xml'
+				 jacoco()
 			}
 		}	
 		
