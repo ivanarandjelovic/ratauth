@@ -3,11 +3,11 @@ pipeline {
 	
 	stages {
 	
-		stage('Checkout') {
-			steps {
-				checkout scm
-			}
-		}
+//		stage('Checkout') {
+//			steps {
+//				checkout scm
+//			}
+//		}
 	
 		stage('Build') {
 			steps {
@@ -15,5 +15,11 @@ pipeline {
 			}
 		}
 	
+		stage('Test') {
+			steps {
+				 sh './gradlew test --info'
+			}
+		}	
+		
 	}
 }
