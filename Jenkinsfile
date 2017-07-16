@@ -23,13 +23,13 @@ pipeline {
 			}
 		}	
 
-		stage('Integration test') {
-			steps {
-				docker {
-					image 'mongo'
+		docker.image('mongo').withRun { mongo ->
+			stage('Integration test') {
+				steps {
+					echo 'Integration tests here ...'
 				}
-			}
-		}	
-		
+			}	
+		}
+				
 	}
 }
