@@ -1,8 +1,8 @@
 pipeline {
 	stages {
 		stage('Checkout') {
-			steps {
-				 echo 'Placeholder for checkout.'
+			node {
+				checkout scm
 			}
 		}
 		stage('Build') {
