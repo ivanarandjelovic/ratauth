@@ -11,7 +11,7 @@ pipeline {
 	
 		stage('Build') {
 			steps {
-				 echo 'Placeholder for build.'
+				 sh 'gradle build --info'
 			}
 		}
 	
