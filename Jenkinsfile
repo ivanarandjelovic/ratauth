@@ -23,8 +23,8 @@ pipeline {
 			}
 		}	
 
-		docker.image('mongo').withRun { mongo ->
-			stage('Integration test') {
+		stage('Integration test') {
+			docker.image('mongo').withRun { mongo ->
 				steps {
 					echo 'Integration tests here ...'
 				}
