@@ -25,6 +25,7 @@ pipeline {
 
 		stage('Integration test') {
 			steps {
+			echo docker;
 				docker.image('mongo').withRun {c ->
 					echo 'Integration tests here ...'
 				}
