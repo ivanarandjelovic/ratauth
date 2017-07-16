@@ -22,6 +22,14 @@ pipeline {
 				 jacoco()
 			}
 		}	
+
+		stage('Integration test') {
+			steps {
+				docker.image('mongo').withRun {c ->
+				echo 'Integration tests here ...'
+				}
+			}
+		}	
 		
 	}
 }
