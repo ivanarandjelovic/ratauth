@@ -17,7 +17,7 @@ public class TestHandlerTest {
 	
 	@Test
 	public void response2() throws Exception {
-		HandlingResult result = RequestFixture.handle(new TestHandler(), fixture -> fixture.uri("/api/2"));
+		HandlingResult result = RequestFixture.handle(new TestHandler(), fixture -> fixture.uri("whatever"));
 		assertEquals("test1", result.rendered(String.class));
 	}
 }
