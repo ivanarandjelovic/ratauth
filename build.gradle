@@ -19,10 +19,41 @@ repositories {
   jcenter()
 }
 
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integration-test/java')
+        }
+        resources.srcDir file('src/integration-test/resources')
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+}
+
 dependencies {
     compile 'org.slf4j:slf4j-simple:+'
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:+'
+    //integrationTestCompile 'org.assertj:assertj-core:3.0.0'
+}
+
+task integrationTest(type: Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    mustRunAfter test
+    // If we want integration tests run everytime
+    //outputs.upToDateWhen { false }
+}
+
+check.dependsOn integrationTest
+
+tasks.withType(Test) {
+   reports.html.destination = file("${reporting.baseDir}/${name}")
 }
 
 mainClassName = "org.aivan.ratauth.Main"
