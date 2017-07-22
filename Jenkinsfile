@@ -9,9 +9,9 @@ pipeline {
 //			}
 //		}
 	
-		stage('Build') {
+		stage('Compile') {
 			steps {
-				 sh './gradlew clean build --info'
+				 sh './gradlew clean classes --info'
 			}
 		}
 	
@@ -33,6 +33,12 @@ pipeline {
 					}
 				}
 			}	
+		}
+		
+		stage('Build') {
+			steps {
+				 sh './gradlew build --info'
+			}
 		}
 				
 	}
