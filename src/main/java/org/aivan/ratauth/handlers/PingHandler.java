@@ -6,15 +6,13 @@ import org.slf4j.LoggerFactory;
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
 
-public class TestHandler implements Handler {
+public class PingHandler implements Handler {
 
-	static Logger log = LoggerFactory.getLogger(TestHandler.class);
+	static Logger log = LoggerFactory.getLogger(PingHandler.class);
 
 	@Override
 	public void handle(Context ctx) throws Exception {
-		log.debug("start");
-		ctx.render("test1");
-		log.debug("end");
+		ctx.render("pong");
 	}
 
 }

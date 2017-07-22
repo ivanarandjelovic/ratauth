@@ -1,23 +1,30 @@
 package org.aivan.ratauth;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 //import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.any;
+import static org.junit.Assert.*;
 
-import ratpack.server.RatpackServerSpec;
+import ratpack.test.MainClassApplicationUnderTest;
 
 public class MainIntTest {
 
+	MainClassApplicationUnderTest app;
+
+	@Before
+	public void setup() {
+		app = new MainClassApplicationUnderTest(Main.class);
+	}
+
+	@After
+	public void teardown() {
+		app.close();
+	}
+
 	@Test
-	public void setup() throws Exception {
-		RatpackServerSpec ratpackServerSpec = mock(RatpackServerSpec.class);
-		Main.setupServer().execute(ratpackServerSpec);
-		verify(ratpackServerSpec, atLeast(1)).handlers(any());
-		verifyNoMoreInteractions(ratpackServerSpec);
+	public void serverAlive() throws Exception {
+		app.test(testHttpClient -> assertEquals("pong", testHttpClient.getText("/ping")));
 	}
 }
