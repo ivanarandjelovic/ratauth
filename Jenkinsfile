@@ -26,7 +26,7 @@ pipeline {
 		stage('Integration test') {
 			steps {
 				script {
-					docker.image('mongo').withRun('-p 27017:27017') { mongo ->
+					docker.image('mongo').withRun() { mongo ->
 						echo 'Integration tests running ...'
 						sh './gradlew cleanIntegrationTest integrationTest --info'
 				 		junit '**/test-results/integrationTest/*.xml'
