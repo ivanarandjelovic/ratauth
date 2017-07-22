@@ -1,0 +1,5 @@
+{
+	"name": "Test Client localhost 80",
+	"website": "http://localhost/",
+	"redirectUri": "http://localhost/"
+}
