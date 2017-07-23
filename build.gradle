@@ -38,6 +38,7 @@ configurations {
 dependencies {
     compile 'org.slf4j:slf4j-simple:+'
     compile 'org.mongodb:mongodb-driver:3.4.2'
+    compile 'org.apache.commons:commons-lang3:3.6'
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:+'
     integrationTestCompile 'org.mongodb:mongodb-driver:3.4.2'

@@ -1,12 +1,12 @@
 package org.aivan.ratauth.handlers;
 
+import org.aivan.ratauth.handlers.request.AuthorizeRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
 import ratpack.http.Request;
-import ratpack.util.MultiValueMap;
 
 public class AuthHandler implements Handler {
 
@@ -17,11 +17,10 @@ public class AuthHandler implements Handler {
 		log.debug("start");
 		
 		Request req = ctx.getRequest();
-		MultiValueMap<String, String> params = req.getQueryParams();
 		
-		String responseType = params.get("response_type");
+		AuthorizeRequest authRequest = AuthorizeRequest.loadFrom(req.getQueryParams());
 		
-		ctx.render("auth, response_type="+responseType);
+		ctx.render("auth, authRequest="+authRequest);
 		
 		log.debug("end");
 	}

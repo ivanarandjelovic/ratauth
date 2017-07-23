@@ -1,5 +1,6 @@
 {
 	"name": "Test Client localhost 8080",
 	"website": "http://localhost:8080/",
-	"redirectUri": "http://localhost:8080/"
+	"redirectUri": "http://localhost:8080/",
+	"clientId": "clientId0"
 }

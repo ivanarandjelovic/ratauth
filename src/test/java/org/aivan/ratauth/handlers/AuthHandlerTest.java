@@ -10,14 +10,14 @@ import ratpack.test.handling.RequestFixture;
 public class AuthHandlerTest {
 
 	@Test
-	public void response() throws Exception {
+	public void responseNoParams() throws Exception {
 		HandlingResult result = RequestFixture.handle(new AuthHandler(), fixture -> {});
-		assertEquals("auth, response_type=null", result.rendered(String.class));
+		assertTrue(result.rendered(String.class).matches("auth, .*AuthorizeRequest.*null.*null.*null.*null.*"));
 	}
 	
 	@Test
-	public void response2() throws Exception {
+	public void responseType() throws Exception {
 		HandlingResult result = RequestFixture.handle(new AuthHandler(), fixture -> fixture.uri("/auth?response_type=1"));
-		assertEquals("auth, response_type=1", result.rendered(String.class));
+		assertTrue(result.rendered(String.class).matches("auth, .*AuthorizeRequest.*responseType=1.*"));
 	}
 }
