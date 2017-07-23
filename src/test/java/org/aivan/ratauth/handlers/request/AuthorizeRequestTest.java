@@ -12,7 +12,9 @@ public class AuthorizeRequestTest {
 	@Test
 	public void defaultValues() throws Exception {
 		Map<String, String> params = new HashMap<String, String>();
+		
 		AuthorizeRequest request = AuthorizeRequest.loadFrom(params);
+		
 		assertNull(request.getClientId());
 		assertNull(request.getRedirectUri());
 		assertNull(request.getResponseType());
@@ -23,7 +25,9 @@ public class AuthorizeRequestTest {
 	public void clientId() throws Exception {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("client_id", "clientId1");
+		
 		AuthorizeRequest request = AuthorizeRequest.loadFrom(params);
+		
 		assertEquals("clientId1", request.getClientId());
 		assertNull(request.getRedirectUri());
 		assertNull(request.getResponseType());
@@ -37,7 +41,9 @@ public class AuthorizeRequestTest {
 		params.put("redirect_uri", "redirect_uri1");
 		params.put("response_type", "response_type1");
 		params.put("scope", "scope1");
+		
 		AuthorizeRequest request = AuthorizeRequest.loadFrom(params);
+		
 		assertEquals("clientId1", request.getClientId());
 		assertEquals("redirect_uri1", request.getRedirectUri());
 		assertEquals("response_type1", request.getResponseType());

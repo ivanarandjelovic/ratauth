@@ -10,9 +10,15 @@ import ratpack.test.handling.RequestFixture;
 public class TokenHandlerTest {
 
 	@Test
-	public void response2() throws Exception {
+	public void responseNoParam() throws Exception {
 		HandlingResult result = RequestFixture.handle(new TokenHandler(), fixture -> fixture.uri("/token"));
-		assertEquals("token", result.rendered(String.class));
+		assertTrue(result.rendered(String.class).matches("token, .*TokenRequest.*null.*null.*null.*null.*null.*null.*null.*null.*"));
+	}
+
+	@Test
+	public void responseOneParam() throws Exception {
+		HandlingResult result = RequestFixture.handle(new TokenHandler(), fixture -> fixture.uri("/token?client_id=1"));
+		assertTrue(result.rendered(String.class).matches("token, .*TokenRequest.*clientId=1.*"));
 	}
 
 }
