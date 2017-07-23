@@ -19,7 +19,7 @@ public class BaseMongoDBTest {
 
 	MongoClient mongoClient;
 	MongoDatabase database;
-	String[] collectionNames = new String[] { "client", "user" };
+	String[] collectionNames = new String[] { "client", "user", "token" };
 
 	@Before
 	public void setup() throws IOException {

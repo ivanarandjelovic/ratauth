@@ -1,0 +1,6 @@
+{
+	"token": "token_valid",
+	"expires": { "$date": "2027-01-30T01:02:03.004" },
+	"scopes": ["read"],
+	"userId": { "$oid": "5974dc2babff2d2642f16e41" }
+}
