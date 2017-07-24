@@ -1,0 +1,2 @@
+mongo_hostname=192.168.99.100
+mongo_port=27017
