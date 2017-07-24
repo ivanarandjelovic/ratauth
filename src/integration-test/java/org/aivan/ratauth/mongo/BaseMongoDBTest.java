@@ -18,7 +18,7 @@ import com.mongodb.client.MongoDatabase;
 public class BaseMongoDBTest {
 
     MongoClient mongoClient;
-    MongoDatabase database;
+    protected MongoDatabase database;
     String[] collectionNames = new String[] { "client", "user", "token" };
 
     @Before
