@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 public class Token {
 	String id;
@@ -18,11 +19,16 @@ public class Token {
 	 */
 	@SuppressWarnings("unchecked")
 	public Token(Document document) {
-		this.id = document.getObjectId("_id").toHexString(); 
-		this.token = document.getString("token"); 
-		this.expires = document.getDate("expires");
-		this.scopes = (List<String>) document.get("scopes");
-		this.userId = document.getObjectId("userId").toHexString(); 
+		if(document != null) {
+			ObjectId oId = document.getObjectId("_id");
+			if(oId != null) {
+				this.id = document.getObjectId("_id").toHexString();
+			}
+			this.token = document.getString("token"); 
+			this.expires = document.getDate("expires");
+			this.scopes = (List<String>) document.get("scopes");
+			this.userId = document.getObjectId("userId").toHexString();
+		}
 	}
 	
 	public String getId() {

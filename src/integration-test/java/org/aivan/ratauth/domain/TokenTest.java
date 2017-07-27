@@ -23,6 +23,7 @@ public class TokenTest extends BaseMongoDBTest {
 		super.setup();
 		tokenColl = database.getCollection("token");
 	}
+	
 	@Test
 	public void loadToken() throws ParseException {
 		Document doc = tokenColl.find(eq("token", "token_expired")).first();
@@ -34,5 +35,17 @@ public class TokenTest extends BaseMongoDBTest {
 		assertEquals(1,t.getScopes().size());
 		assertEquals("read",t.getScopes().get(0));
 		assertEquals("5974dc2babff2d2642f16e41",t.getUserId());
+	}
+	
+	@Test
+	public void loadNonExistingToken() throws ParseException {
+		Document doc = tokenColl.find(eq("token", "NON_EXISTING_TOKEN")).first();
+		Token t = new Token(doc);
+		assertNotNull(t);
+		assertNull(t.getId());
+		assertNull(t.getToken());
+		assertNull(t.getExpires());
+		assertNull(t.getScopes());
+		assertNull(t.getUserId());
 	}
 }
