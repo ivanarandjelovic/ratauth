@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 import com.mongodb.client.MongoCollection;
 
-public class TokenTest extends BaseMongoDBTest {
+public class TokenIntegrationTest extends BaseMongoDBTest {
 
 	MongoCollection<Document> tokenColl;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");

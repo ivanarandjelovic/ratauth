@@ -12,7 +12,7 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.junit.Test;
 
-public class TokenUnitTest {
+public class TokenTest {
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
 

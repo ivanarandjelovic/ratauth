@@ -12,13 +12,13 @@ public class VerifyHandlerTest {
 	@Test
 	public void responseNoParams() throws Exception {
 		HandlingResult result = RequestFixture.handle(new VerifyHandler(), fixture -> fixture.uri("/verify"));
-		assertTrue(result.rendered(String.class).matches("verify, .*VerifyRequest.*null.*"));
+		assertEquals(400, result.getStatus().getCode());
 	}
 
 	@Test
 	public void responseWithParams() throws Exception {
 		HandlingResult result = RequestFixture.handle(new VerifyHandler(), fixture -> fixture.uri("/verify?token=1"));
-		assertTrue(result.rendered(String.class).matches("verify, .*VerifyRequest.*token=1.*"));
+		assertEquals(400, result.getStatus().getCode());
 	}
 
 }

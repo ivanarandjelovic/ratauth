@@ -1,4 +1,5 @@
 {
+	"_id": { "$oid": "597a630b87878e20fc800da5" },
 	"token": "token_valid",
 	"expires": { "$date": "2027-01-30T01:02:03.004" },
 	"scopes": ["read", "write"],
