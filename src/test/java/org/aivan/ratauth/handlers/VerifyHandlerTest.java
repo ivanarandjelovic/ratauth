@@ -64,5 +64,20 @@ public class VerifyHandlerTest {
 		});
 		assertEquals(200, result.getStatus().getCode());
 	}
+	
+	@Test
+	public void responseForEmptyToken() throws Exception {
+		HandlingResult result = RequestFixture.handle(new VerifyHandler(), fixture -> {
+			fixture.registry(reg -> {
+				AuthDao dao = mock(AuthDao.class);
+				Document doc = new Document();
+				Token token = new Token(doc);
+				when(dao.loadToken(any())).thenReturn(token);
+				reg.add(dao);
+			});
+			fixture.uri("/verify?token=whatever");
+		});
+		assertEquals(400, result.getStatus().getCode());
+	}
 
 }

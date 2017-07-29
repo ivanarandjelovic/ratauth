@@ -2,8 +2,6 @@ package org.aivan.ratauth.dao;
 
 import static com.mongodb.client.model.Filters.eq;
 
-import java.io.IOException;
-
 import org.aivan.ratauth.domain.Token;
 import org.bson.Document;
 import org.slf4j.Logger;
@@ -21,14 +19,8 @@ public class MongoDAO implements AuthDao {
 	protected MongoDatabase database;
 	MongoCollection<Document> tokenColl;
 
-	public MongoDAO() {
+	public MongoDAO(MongoClient mongoClient) {
 		super();
-		try {
-			mongoClient = Util.newMongoClient();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		database = mongoClient.getDatabase("ratauth");
 		tokenColl = database.getCollection("token");
 	}

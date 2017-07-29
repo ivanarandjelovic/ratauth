@@ -15,22 +15,27 @@ public class Token {
 
 	/**
 	 * Constructor from BSON document
-	 * @param document BSON document
+	 * 
+	 * @param document
+	 *            BSON document
 	 */
 	@SuppressWarnings("unchecked")
 	public Token(Document document) {
-		if(document != null) {
+		if (document != null) {
 			ObjectId oId = document.getObjectId("_id");
-			if(oId != null) {
+			if (oId != null) {
 				this.id = document.getObjectId("_id").toHexString();
 			}
-			this.token = document.getString("token"); 
+			this.token = document.getString("token");
 			this.expires = document.getDate("expires");
 			this.scopes = (List<String>) document.get("scopes");
-			this.userId = document.getObjectId("userId").toHexString();
+			ObjectId userId = document.getObjectId("userId");
+			if (userId != null) {
+				this.userId = userId.toHexString();
+			}
 		}
 	}
-	
+
 	public String getId() {
 		return id;
 	}
@@ -50,5 +55,5 @@ public class Token {
 	public String getToken() {
 		return token;
 	}
-	
+
 }

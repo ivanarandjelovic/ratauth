@@ -28,6 +28,17 @@ public class TokenTest {
 	}
 	
 	@Test
+	public void fromEmptyDocumemt() {
+		Token t = new Token(new Document());
+		assertNotNull(t);
+		assertNull(t.getId());
+		assertNull(t.getToken());
+		assertNull(t.getExpires());
+		assertNull(t.getScopes());
+		assertNull(t.getUserId());
+	}
+	
+	@Test
 	public void fromDocumemt() throws ParseException {
 		Document doc = new Document();
 		doc.put("_id", new ObjectId("5974dc2babff2d2642f16e41"));
