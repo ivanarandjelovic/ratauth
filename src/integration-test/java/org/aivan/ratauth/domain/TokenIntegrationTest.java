@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import org.aivan.ratauth.mongo.BaseMongoDBTest;
+import org.aivan.ratauth.dao.BaseMongoDBTest;
 import org.bson.Document;
 import org.junit.Before;
 import org.junit.Test;

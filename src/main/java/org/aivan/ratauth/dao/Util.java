@@ -1,4 +1,4 @@
-package org.aivan.ratauth.mongo;
+package org.aivan.ratauth.dao;
 
 import java.io.IOException;
 import java.io.InputStream;

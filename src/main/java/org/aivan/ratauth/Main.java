@@ -1,5 +1,6 @@
 package org.aivan.ratauth;
 
+import org.aivan.ratauth.dao.MongoDAO;
 import org.aivan.ratauth.handlers.AuthHandler;
 import org.aivan.ratauth.handlers.PingHandler;
 import org.aivan.ratauth.handlers.TokenHandler;
@@ -8,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ratpack.func.Action;
+import ratpack.registry.Registry;
 import ratpack.server.RatpackServer;
 import ratpack.server.RatpackServerSpec;
 
@@ -31,10 +33,10 @@ public class Main {
 
 	// function to setup Ratpack server
 	protected static Action<? super RatpackServerSpec> setupServer() {
-		return serverSpec -> serverSpec.handlers(chain -> chain.prefix("ping", prefix -> prefix.get(pingHandler))
-				.prefix("auth", prefix -> prefix.get(authHandler))
+		return serverSpec -> serverSpec.handlers(chain -> chain.all(ctx -> ctx.next(Registry.single(new MongoDAO())))
+				.prefix("ping", prefix -> prefix.get(pingHandler)).prefix("auth", prefix -> prefix.get(authHandler))
 				.prefix("token", prefix -> prefix.get(tokenHandler))
-		.prefix("verify", prefix -> prefix.get(verifyHandler)));
+				.prefix("verify", prefix -> prefix.get(verifyHandler)));
 	}
 
 }

@@ -1,4 +1,4 @@
-package org.aivan.ratauth.mongo;
+package org.aivan.ratauth.dao;
 
 import static org.junit.Assert.*;
 
@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
+import org.aivan.ratauth.dao.Util;
 import org.bson.Document;
 import org.junit.After;
 import org.junit.Before;

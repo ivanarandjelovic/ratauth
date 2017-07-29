@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 
 import org.aivan.ratauth.Main;
-import org.aivan.ratauth.mongo.BaseMongoDBTest;
+import org.aivan.ratauth.dao.BaseMongoDBTest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

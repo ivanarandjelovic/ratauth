@@ -1,10 +1,11 @@
-package org.aivan.ratauth.mongo;
+package org.aivan.ratauth.dao;
 
 import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.Properties;
 
+import org.aivan.ratauth.dao.Util;
 import org.junit.Before;
 import org.junit.Test;
 
