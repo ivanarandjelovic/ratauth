@@ -14,7 +14,7 @@ import org.junit.Test;
 
 public class TokenTest {
 
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+	static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
 
 	@Test
 	public void fromNullDocumemt() {
@@ -40,18 +40,26 @@ public class TokenTest {
 	
 	@Test
 	public void fromDocumemt() throws ParseException {
-		Document doc = new Document();
-		doc.put("_id", new ObjectId("5974dc2babff2d2642f16e41"));
-		doc.put("token", "token");
-		doc.put("expires", sdf.parse("2017-01-30T01:02:03.004"));
-		doc.put("scopes", new ArrayList<String>());
-		doc.put("userId", new ObjectId("5974dc2babff2d2642f16e42"));
-		Token t = new Token(doc);
+		Token t = new Token(createDocumentForToken());
+		validateToken(t);
+	}
+
+	public static void validateToken(Token t) throws ParseException {
 		assertNotNull(t);
 		assertEquals("5974dc2babff2d2642f16e41", t.getId());
 		assertEquals("token",t.getToken());
 		assertEquals(sdf.parse("2017-01-30T01:02:03.004"),t.getExpires());
 		assertEquals(0,t.getScopes().size());
 		assertEquals("5974dc2babff2d2642f16e42",t.getUserId());
+	}
+
+	public static Document createDocumentForToken() throws ParseException {
+		Document doc = new Document();
+		doc.put("_id", new ObjectId("5974dc2babff2d2642f16e41"));
+		doc.put("token", "token");
+		doc.put("expires", sdf.parse("2017-01-30T01:02:03.004"));
+		doc.put("scopes", new ArrayList<String>());
+		doc.put("userId", new ObjectId("5974dc2babff2d2642f16e42"));
+		return doc;
 	}
 }
