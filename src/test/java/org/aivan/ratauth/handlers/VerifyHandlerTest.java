@@ -66,6 +66,26 @@ public class VerifyHandlerTest {
 	}
 	
 	@Test
+	public void responseForExpiredToken() throws Exception {
+		HandlingResult result = RequestFixture.handle(new VerifyHandler(), fixture -> {
+			fixture.registry(reg -> {
+				AuthDao dao = mock(AuthDao.class);
+				Document doc = new Document();
+				doc.put("_id", new ObjectId("5974dc2babff2d2642f16e41"));
+				doc.put("token", "token");
+				doc.put("expires", new Date(System.currentTimeMillis()-1L));
+				doc.put("scopes", new ArrayList<String>());
+				doc.put("userId", new ObjectId("5974dc2babff2d2642f16e42"));
+				Token token = new Token(doc);
+				when(dao.loadToken(any())).thenReturn(token);
+				reg.add(dao);
+			});
+			fixture.uri("/verify?token=whatever");
+		});
+		assertEquals(400, result.getStatus().getCode());
+	}
+	
+	@Test
 	public void responseForEmptyToken() throws Exception {
 		HandlingResult result = RequestFixture.handle(new VerifyHandler(), fixture -> {
 			fixture.registry(reg -> {
