@@ -5,50 +5,61 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import com.mongodb.MongoClient;
+import com.mongodb.async.client.MongoClients;
 
 public class Util {
 
-    private Util() {
-        // static methods only!
-    }
+	private Util() {
+		// static methods only!
+	}
 
-    public static MongoClient newMongoClient() throws IOException {
+	public static com.mongodb.async.client.MongoClient newMongoAsyncClient() throws IOException {
 
-        Properties appProps = loadApplicationProperties();
+		Properties appProps = loadApplicationProperties();
 
-        String hostname = getMongoHostname(appProps);
-        int port = getMongoPort(appProps);
+		String hostname = getMongoHostname(appProps);
+		int port = getMongoPort(appProps);
 
-        return new MongoClient(hostname, port);
-    }
+		return MongoClients.create("mongodb://" + hostname + ":" + port);
+	}
 
-    static int getMongoPort(Properties appProps) {
-        int port = 27017;
-        String newPort = appProps.getProperty("mongo_port");
-        if (newPort != null) {
-            port = Integer.parseInt(newPort);
-        }
-        return port;
-    }
+	public static MongoClient newMongoClient() throws IOException {
 
-    static String getMongoHostname(Properties appProps) {
-        String hostname = "localhost";
-        String newHostname = appProps.getProperty("mongo_hostname");
-        if (newHostname != null) {
-            hostname = newHostname;
-        }
-        return hostname;
-    }
+		Properties appProps = loadApplicationProperties();
 
-    static Properties loadApplicationProperties() throws IOException {
-        // Load the data before the test
-        Properties appProps = new Properties();
-        try (InputStream is = Util.class.getClassLoader().getResourceAsStream("app.properties")) {
-            if (is != null) {
-                appProps.load(is);
-            }
-        }
-        return appProps;
-    }
+		String hostname = getMongoHostname(appProps);
+		int port = getMongoPort(appProps);
+
+		return new MongoClient(hostname, port);
+	}
+
+	static int getMongoPort(Properties appProps) {
+		int port = 27017;
+		String newPort = appProps.getProperty("mongo_port");
+		if (newPort != null) {
+			port = Integer.parseInt(newPort);
+		}
+		return port;
+	}
+
+	static String getMongoHostname(Properties appProps) {
+		String hostname = "localhost";
+		String newHostname = appProps.getProperty("mongo_hostname");
+		if (newHostname != null) {
+			hostname = newHostname;
+		}
+		return hostname;
+	}
+
+	static Properties loadApplicationProperties() throws IOException {
+		// Load the data before the test
+		Properties appProps = new Properties();
+		try (InputStream is = Util.class.getClassLoader().getResourceAsStream("app.properties")) {
+			if (is != null) {
+				appProps.load(is);
+			}
+		}
+		return appProps;
+	}
 
 }

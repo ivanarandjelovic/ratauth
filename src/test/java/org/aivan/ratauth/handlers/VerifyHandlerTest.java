@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.aivan.ratauth.dao.AuthDao;
+import org.aivan.ratauth.dao.AuthSyncDao;
 import org.aivan.ratauth.domain.Token;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -27,7 +27,7 @@ public class VerifyHandlerTest {
 	public void responseNoParams() throws Exception {
 		HandlingResult result = RequestFixture.handle(new VerifyHandler(), fixture -> {
 			fixture.registry(reg -> {
-				reg.add(mock(AuthDao.class));
+				reg.add(mock(AuthSyncDao.class));
 			});
 			fixture.uri("/verify");
 		});
@@ -38,7 +38,7 @@ public class VerifyHandlerTest {
 	public void responseWithParams() throws Exception {
 		HandlingResult result = RequestFixture.handle(new VerifyHandler(), fixture -> {
 			fixture.registry(reg -> {
-				reg.add(mock(AuthDao.class));
+				reg.add(mock(AuthSyncDao.class));
 			});
 			fixture.uri("/verify?token=1");
 		});
@@ -49,7 +49,7 @@ public class VerifyHandlerTest {
 	public void responseForGoodToken() throws Exception {
 		HandlingResult result = RequestFixture.handle(new VerifyHandler(), fixture -> {
 			fixture.registry(reg -> {
-				AuthDao dao = mock(AuthDao.class);
+				AuthSyncDao dao = mock(AuthSyncDao.class);
 				Document doc = new Document();
 				doc.put("_id", new ObjectId("5974dc2babff2d2642f16e41"));
 				doc.put("token", "token");
@@ -69,7 +69,7 @@ public class VerifyHandlerTest {
 	public void responseForExpiredToken() throws Exception {
 		HandlingResult result = RequestFixture.handle(new VerifyHandler(), fixture -> {
 			fixture.registry(reg -> {
-				AuthDao dao = mock(AuthDao.class);
+				AuthSyncDao dao = mock(AuthSyncDao.class);
 				Document doc = new Document();
 				doc.put("_id", new ObjectId("5974dc2babff2d2642f16e41"));
 				doc.put("token", "token");
@@ -89,7 +89,7 @@ public class VerifyHandlerTest {
 	public void responseForEmptyToken() throws Exception {
 		HandlingResult result = RequestFixture.handle(new VerifyHandler(), fixture -> {
 			fixture.registry(reg -> {
-				AuthDao dao = mock(AuthDao.class);
+				AuthSyncDao dao = mock(AuthSyncDao.class);
 				Document doc = new Document();
 				Token token = new Token(doc);
 				when(dao.loadToken(any())).thenReturn(token);

@@ -11,18 +11,19 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-public class MongoDAO implements AuthDao {
+public class MongoSyncDAO implements AuthSyncDao {
 
-	static Logger log = LoggerFactory.getLogger(MongoDAO.class);
+	static Logger log = LoggerFactory.getLogger(MongoSyncDAO.class);
 	
 	MongoClient mongoClient;
 	protected MongoDatabase database;
 	MongoCollection<Document> tokenColl;
 
-	public MongoDAO(MongoClient mongoClient) {
+	public MongoSyncDAO(MongoClient mongoClient) {
 		super();
 		database = mongoClient.getDatabase("ratauth");
 		tokenColl = database.getCollection("token");
+		log.warn("Created");
 	}
 
 	/* (non-Javadoc)

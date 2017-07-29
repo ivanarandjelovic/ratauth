@@ -1,0 +1,4 @@
+verify-test did arround 5000 req/sec with sync dao (for 200x200).
+
+Initial async implementation did 4600 req/sec (probably since there is only memory action, no disk or network)
+

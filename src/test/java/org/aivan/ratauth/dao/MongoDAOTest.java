@@ -20,7 +20,7 @@ import org.aivan.ratauth.domain.TokenTest;
 
 public class MongoDAOTest {
 
-	MongoDAO dao;
+	MongoSyncDAO dao;
 	
 	MongoClient mongoClient;
 	MongoDatabase database;
@@ -35,7 +35,7 @@ public class MongoDAOTest {
 		when(mongoClient.getDatabase(any())).thenReturn(database);
 		when(database.getCollection(any())).thenReturn(tokenColl);
 		
-		dao = new MongoDAO(mongoClient);
+		dao = new MongoSyncDAO(mongoClient);
 	}
 
 	@Test
