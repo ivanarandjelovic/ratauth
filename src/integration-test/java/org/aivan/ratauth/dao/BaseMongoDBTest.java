@@ -15,6 +15,8 @@ import org.junit.Test;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.IndexOptions;
+import com.mongodb.client.model.Indexes;
 
 public class BaseMongoDBTest {
 
@@ -29,6 +31,16 @@ public class BaseMongoDBTest {
         for (String collectionName : collectionNames) {
             loadCollection(collectionName);
         }
+    }
+    
+    public static void main(String...args) throws IOException {
+    	MongoClient mc;
+        MongoDatabase db;
+        mc = Util.newMongoClient();
+        db = mc.getDatabase("ratauth");
+        MongoCollection<Document> collection = db.getCollection("token");
+        collection.createIndex(Indexes.ascending("token"),new IndexOptions().unique(true));
+        mc.close();
     }
 
     private void loadCollection(String collectionName) throws IOException {
