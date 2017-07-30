@@ -140,7 +140,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="token" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">token_expired</stringProp>
+                <stringProp name="Argument.value">token_${__Random(0,499998)}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">token</stringProp>
@@ -177,7 +177,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="token" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">token_valid</stringProp>
+                <stringProp name="Argument.value">token_${__Random(500000,999999)}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">token</stringProp>
