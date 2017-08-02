@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.aivan.ratauth.dao.AuthAsyncDao;
-import org.aivan.ratauth.dao.AuthSyncDao;
 import org.aivan.ratauth.domain.Token;
 import org.bson.Document;
 import org.bson.types.ObjectId;

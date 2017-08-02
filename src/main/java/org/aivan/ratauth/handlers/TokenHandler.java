@@ -5,15 +5,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ratpack.handling.Context;
-import ratpack.handling.Handler;
 import ratpack.http.Request;
 
-public class TokenHandler implements Handler {
+public class TokenHandler extends RatauthHandler {
 
 	static Logger log = LoggerFactory.getLogger(TokenHandler.class);
 
 	@Override
-	public void handle(Context ctx) throws Exception {
+	public void ratAuthHandle(Context ctx) throws Exception {
 		log.debug("start");
 
 		Request req = ctx.getRequest();
