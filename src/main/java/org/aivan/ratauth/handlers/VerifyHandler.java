@@ -9,15 +9,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ratpack.handling.Context;
-import ratpack.handling.Handler;
 import ratpack.http.Request;
 
-public class VerifyHandler implements Handler {
+public class VerifyHandler extends RatauthHandler {
 
 	static Logger log = LoggerFactory.getLogger(VerifyHandler.class);
 
 	@Override
-	public void handle(Context ctx) throws Exception {
+	public void ratAuthHandle(Context ctx) throws Exception {
 		Request req = ctx.getRequest();
 
 		VerifyRequest verifyRequest = VerifyRequest.loadFrom(req.getQueryParams());
