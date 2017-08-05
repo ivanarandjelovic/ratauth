@@ -7,6 +7,7 @@ import org.aivan.ratauth.handlers.request.VerifyRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ratpack.func.Block;
 import ratpack.handling.Context;
 import ratpack.http.Request;
 
@@ -15,7 +16,7 @@ public class VerifyHandler extends RatauthHandler {
 	static Logger log = LoggerFactory.getLogger(VerifyHandler.class);
 
 	@Override
-	public void ratAuthHandle(Context ctx) throws Exception {
+	public void ratAuthHandle(Context ctx, Block block) throws Exception {
 		Request req = ctx.getRequest();
 
 		VerifyRequest verifyRequest = VerifyRequest.loadFrom(req.getQueryParams());
@@ -27,8 +28,10 @@ public class VerifyHandler extends RatauthHandler {
 			if (token != null && token.getExpires() != null
 					&& token.getExpires().after(new Date(System.currentTimeMillis()))) {
 				ctx.getResponse().status(200).send();
+				block.execute();
 			} else {
 				ctx.getResponse().status(400).send();
+				block.execute();
 			}
 		});
 	}

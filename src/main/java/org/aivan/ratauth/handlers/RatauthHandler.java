@@ -3,6 +3,7 @@ package org.aivan.ratauth.handlers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ratpack.func.Block;
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
 
@@ -26,14 +27,12 @@ public abstract class RatauthHandler implements Handler {
 	@Override
 	public void handle(Context ctx) throws Exception {
 		startRequest();
-		ratAuthHandle(ctx);
-		endRequest();
-		
+		ratAuthHandle(ctx, () -> endRequest());
 	}
 
 
 
-	protected abstract void ratAuthHandle(Context ctx) throws Exception;
+	protected abstract void ratAuthHandle(Context ctx, Block op) throws Exception;
 
 	protected synchronized static void endRequest() {
 		activeRequestsCounter--;

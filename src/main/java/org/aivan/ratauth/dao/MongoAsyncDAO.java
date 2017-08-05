@@ -37,14 +37,15 @@ public class MongoAsyncDAO implements AuthAsyncDao {
 	@Override
 	public Promise<Token> loadToken(String token) {
 		FindIterable<Document> find = tokenColl.find(eq("token", token));
-		return Promise.async(down -> 
+		return Promise.async(down -> {
 			find.first( (res,t) -> {
 				if(t==null) {
 					down.success(new Token(res));
 				} else {
 					down.error(t);
 				}
-			})
+			});
+		}
 		);
 	}
 }
